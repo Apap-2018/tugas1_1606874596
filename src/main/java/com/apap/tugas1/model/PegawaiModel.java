@@ -10,6 +10,8 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.sql.Date;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Entity
@@ -118,5 +120,10 @@ public class PegawaiModel implements Serializable {
 
     public void setJabatan(List<JabatanModel> jabatan) {
         this.jabatan = jabatan;
+    }
+
+    public JabatanModel getJabatanGajiTertinggi() {
+        Collections.sort(this.jabatan, Comparator.comparing(JabatanModel::getGajiPokok));
+        return this.jabatan.get(0);
     }
 }

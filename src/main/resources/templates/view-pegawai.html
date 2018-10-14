@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title id="pageTitle">Detail Pegawai</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<h1 th:text="'Lihat Data Pegawai: '+${pegawai.getNip()}"></h1>
+<p th:text="'NIP: '+${pegawai.getNip()}"></p>
+<p th:text="'Nama: '+${pegawai.getNama()}"></p>
+<p th:text="'Tempat Lahir: '+${pegawai.getTempatLahir()}"></p>
+<p th:text="'Tanggal Lahir: '+${pegawai.getTanggalLahir()}"></p>
+<p th:text="'Tahun Masuk: '+${pegawai.getTahunMasuk()}"></p>
+<p th:text="'Nama Instansi: '+${pegawai.getInstansi().getNama()}"></p>
+<p>Jabatan:</p>
+<div th:each="jabatan : ${jabatans}">
+    <p th:text="'- ' + ${jabatan.getNama()}"></p>
+</div>
+<p th:text="'Gaji: Rp'+${gaji}"></p>
+
+
+</body>
+</html>

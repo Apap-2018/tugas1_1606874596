@@ -32,7 +32,7 @@ public class JabatanModel implements Serializable {
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             mappedBy = "jabatan")
-    private List<PegawaiModel> post;
+    private List<PegawaiModel> pegawai;
 
     public BigInteger getId() {
         return id;
@@ -66,11 +66,13 @@ public class JabatanModel implements Serializable {
         this.gajiPokok = gajiPokok;
     }
 
-    public List<PegawaiModel> getPost() {
-        return post;
+    public List<PegawaiModel> getPegawai() {
+        return pegawai;
     }
 
-    public void setPost(List<PegawaiModel> post) {
-        this.post = post;
+    public void setPegawai(List<PegawaiModel> pegawai) {
+        this.pegawai = pegawai;
     }
+
+
 }

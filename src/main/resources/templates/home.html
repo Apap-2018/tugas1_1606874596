@@ -12,5 +12,24 @@
 <h1>Sistem Informasi Kepegawaian</h1>
 <h5>Selamat datang di SIPEG!</h5>
 
+<br>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Lihat Data Pegawai berdasarkan NIP
+            </div>
+            <form th:action="@{/pegawai}" method="GET">
+                <div class="card-body">
+                    <label for="nip">NIP:</label>
+                    <input type="text" name="nip" class="form-control" />
+                    <p></p>
+                    <button type="submit" class="btn btn-primary">Cari</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
