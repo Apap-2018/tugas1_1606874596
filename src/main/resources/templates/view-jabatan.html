@@ -28,13 +28,24 @@
                         </tr>
                         <tr>
                             <td><b>Gaji Pokok</b></td>
-                            <td th:text="${jabatan.getGajiPokok()}"></td>
+                            <td th:text="'Rp'+${jabatan.getGajiPokok()}"></td>
                         </tr>
 
                         </tbody>
                     </table>
                 </div>
             </div>
+        </div>
+    </div>
+    <br>
+    <div class="row justify-content-center">
+        <div class="col-md-2">
+            <form th:action="@{/jabatan/ubah}" method="GET">
+                    <button th:value="${jabatan.getId()}" type="submit" name="id" class="btn btn-primary btn-lg">Ubah</button>
+            </form>
+        </div>
+        <div class="col-md-2">
+            <a class="btn btn-danger btn-lg" href="/" role="button">Hapus</a>
         </div>
     </div>
 </div>

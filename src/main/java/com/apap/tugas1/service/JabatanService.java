@@ -12,7 +12,7 @@ public interface JabatanService {
     JabatanModel getJabatanDetailById(BigInteger id);
 
     void addJabatan(JabatanModel jabatan);
-    void updateJabatan(JabatanModel jabatan, String id);
+    void updateJabatan(JabatanModel jabatan, BigInteger id);
 
 
 }
