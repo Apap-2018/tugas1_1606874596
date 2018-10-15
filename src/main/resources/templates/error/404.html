@@ -8,7 +8,17 @@
 </head>
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
-    <h2>Halaman tidak ditemukan</h2>
 
+    <div class="container jumbotron">
+        <h1 class="display-3">Skip!😹</h1>
+        <p class="lead">404 Not Found: Page yang kamu cari sayangnya tidak ditemukan.</p>
+        <hr class="my-2">
+        <p>Yuk semangat buat coba lagi!</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="/" role="button">Back Home</a>
+        </p>
+    </div>
+
+    <footer th:replace="fragments/fragment :: footer"></footer>
 </body>
 </html>

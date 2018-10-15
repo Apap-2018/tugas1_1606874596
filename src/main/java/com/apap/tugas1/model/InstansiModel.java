@@ -15,7 +15,6 @@ import java.util.List;
 @Table(name = "instansi")
 public class InstansiModel implements Serializable {
     @Id
-    @Size(max = 20)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigInteger id;
 

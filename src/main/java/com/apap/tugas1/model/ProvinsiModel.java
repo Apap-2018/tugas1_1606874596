@@ -11,7 +11,6 @@ import java.util.List;
 @Table(name = "provinsi")
 public class ProvinsiModel implements Serializable {
     @Id
-    @Size(max = 20)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigInteger id;
 
