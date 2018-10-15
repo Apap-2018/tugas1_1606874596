@@ -7,11 +7,14 @@
     <head th:fragment="css">
         <link rel = "stylesheet" th:href = "@{/css/bootstrap.min.css}">
         <link rel = "stylesheet" th:href = "@{/css/style.css}">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css"/>
     </head>
 
     <head th:fragment="js">
         <script th:src = "@{/js/boostrap.min.js}"></script>
         <script th:src = "@{/jquery/jquery-3.3.1.min.js}"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
     </head>
 
 </head>
@@ -36,7 +39,7 @@
                 <a class="nav-link" href="/">Cari Pegawai</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/">Lihat Semua Jabatan</a>
+                <a class="nav-link" href="/jabatan/viewall">Lihat Semua Jabatan</a>
             </li>
         </ul>
     </div>

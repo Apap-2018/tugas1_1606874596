@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
+import java.util.List;
 
 
 @Controller
@@ -47,5 +48,13 @@ public class JabatanController {
     private String updateJabatanSubmit (@ModelAttribute JabatanModel jabatan) {
         jabatanService.updateJabatan(jabatan, jabatan.getId());
         return "update";
+    }
+
+    @RequestMapping(value = "/jabatan/viewall", method = RequestMethod.GET)
+    public String viewAll(Model model){
+        List<JabatanModel> allJabatan = jabatanService.getAllJabatan();
+
+        model.addAttribute("allJabatan", allJabatan);
+        return"viewall-jabatan";
     }
 }
