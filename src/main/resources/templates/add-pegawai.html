@@ -25,13 +25,9 @@
     <input type="number" name="tahunMasuk" />
     <br>
     Tanggal Lahir: <br>
-    <select th:field="*{countryId}">
-        <option value=""> -- </option>
-        <option th:each="entry : ${mapCountries.entrySet()}"
-                th:value="${entry.key}"
-                th:utext="${entry.value}">
-        </option>
-    </select>
+
+    /** Isi ini **/
+
     <br>
     <br>
     <button type="submit">Submit</button>
