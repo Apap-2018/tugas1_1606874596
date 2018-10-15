@@ -9,19 +9,20 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
 
-<h1 th:text="'Lihat Data Pegawai: '+${pegawai.getNip()}"></h1>
-<p th:text="'NIP: '+${pegawai.getNip()}"></p>
-<p th:text="'Nama: '+${pegawai.getNama()}"></p>
-<p th:text="'Tempat Lahir: '+${pegawai.getTempatLahir()}"></p>
-<p th:text="'Tanggal Lahir: '+${pegawai.getTanggalLahir()}"></p>
-<p th:text="'Tahun Masuk: '+${pegawai.getTahunMasuk()}"></p>
-<p th:text="'Nama Instansi: '+${pegawai.getInstansi().getNama()}"></p>
-<p>Jabatan:</p>
-<div th:each="jabatan : ${jabatans}">
-    <p th:text="'- ' + ${jabatan.getNama()}"></p>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header" align="center" th:text="'Data Pegawai: '+${pegawai.getNip()}">
+                </div>
+                <div class="card-body">
+                    <table th:replace="fragments/fragment :: dataPegawai"></table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p th:text="'Gaji: Rp'+${gaji}"></p>
 
-
+<footer th:replace="fragments/fragment :: footer"></footer>
 </body>
 </html>

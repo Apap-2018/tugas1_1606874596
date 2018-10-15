@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th = "http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title id="pageTitle">Tambah Pegawai</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
 
+<h1>Tambah Pegawai</h1>
+
+<form th:action="@{/pegawai/tambah}" th:object="${pegawai}" method="POST">
+    Nama: <br>
+    <input type="text" name="licenseNumber" />
+    <br>
+    Tempat Lahir: <br>
+    <input type="text" name="name" />
+    <br>
+    Tanggal Lahir: <br>
+    <input type="date" name="tanggalLahir" />
+    <br>
+    Tahun Masuk: <br>
+    <input type="number" name="tahunMasuk" />
+    <br>
+    Tanggal Lahir: <br>
+    <select th:field="*{countryId}">
+        <option value=""> -- </option>
+        <option th:each="entry : ${mapCountries.entrySet()}"
+                th:value="${entry.key}"
+                th:utext="${entry.value}">
+        </option>
+    </select>
+    <br>
+    <br>
+    <button type="submit">Submit</button>
+</form>
+
+<footer th:replace="fragments/fragment :: footer"></footer>
 </body>
 </html>

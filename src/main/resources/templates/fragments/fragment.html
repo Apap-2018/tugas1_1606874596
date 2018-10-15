@@ -6,24 +6,86 @@
 
     <head th:fragment="css">
         <link rel = "stylesheet" th:href = "@{/css/bootstrap.min.css}">
+        <link rel = "stylesheet" th:href = "@{/css/style.css}">
     </head>
 
     <head th:fragment="js">
         <script th:src = "@{/js/boostrap.min.js}"></script>
+        <script th:src = "@{/jquery/jquery-3.3.1.min.js}"></script>
     </head>
 
 </head>
 
 <body>
+
+
 <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#" th:include=":: #pageTitle">SIPEG</a>
+    <a class="navbar-brand" href="#" >SIPEG</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/pegawai/tambah">Tambah Pegawai</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/">Tambah Jabatan</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/">Cari Pegawai</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/">Lihat Semua Jabatan</a>
             </li>
         </ul>
     </div>
 </nav>
+
+<table th:fragment="dataPegawai" class="table table-borderless">
+    <tbody>
+    <tr>
+        <td><b>NIP</b></td>
+        <td th:text="${pegawai.getNama()}"></td>
+    </tr>
+    <tr>
+        <td><b>Nama</b></td>
+        <td th:text="${pegawai.getTempatLahir()}"></td>
+    </tr>
+    <tr>
+        <td><b>Tempat Lahir</b></td>
+        <td th:text="${pegawai.getTempatLahir()}"></td>
+    </tr>
+    <tr>
+        <td><b>Tanggal Lahir</b></td>
+        <td th:text="${pegawai.getTanggalLahir()}"></td>
+    </tr>
+    <tr>
+        <td><b>Tahun Masuk</b></td>
+        <td th:text="${pegawai.getTahunMasuk()}"></td>
+    </tr>
+    <tr>
+        <td><b>Nama Instansi</b></td>
+        <td th:text="${pegawai.getInstansi().getNama()}"></td>
+    </tr>
+    <tr>
+        <td><b>Jabatan</b></td>
+        <td>
+            <div th:each="jabatan : ${jabatans}">
+                <span class="badge badge-primary" th:text="${jabatan.getNama()}"></span>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><b>Gaji</b></td>
+        <td th:text="'Rp'+${gaji}"></td>
+    </tr>
+    </tbody>
+</table>
+<footer th:fragment="footer">
+    <div class="container" style="text-align: center; font-size: 14px;">
+	<span >Made with <span style="color: #fd0864">💔</span> and <span style="color: #fff000">&#128557;</span> by <a href="https://github.com/ntegar/tugas1_1606874596">Nabil Tegar</a>
+    </div>
+</footer>
 </body>
 </html>

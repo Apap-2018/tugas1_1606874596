@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title id="pageTitle">Detail Pegawai</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header" align="center" th:text="'Detail Jabatan: '+${jabatan.getNama()}">
+                </div>
+                <div class="card-body">
+                    <table class="table table-borderless">
+                        <tbody>
+                        <tr>
+                            <td><b>Nama</b></td>
+                            <td th:text="${jabatan.getNama()}"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Deskripsi</b></td>
+                            <td th:text="${jabatan.getDeskripsi()}"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Gaji Pokok</b></td>
+                            <td th:text="${jabatan.getGajiPokok()}"></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="fragments/fragment :: footer"></footer>
+</body>
+</html>
