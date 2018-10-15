@@ -9,6 +9,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Collections;
+import java.util.Comparator;
+import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -75,5 +78,15 @@ public class InstansiModel implements Serializable {
 
     public void setProvinsi(ProvinsiModel provinsi) {
         this.provinsi = provinsi;
+    }
+
+    public PegawaiModel getPegawaiByTermuda() {
+        Collections.sort(this.pegawaiInstansi, Comparator.comparing(PegawaiModel::getTanggalLahir));
+        return this.pegawaiInstansi.get(pegawaiInstansi.size()-1);
+    }
+
+    public PegawaiModel getPegawaiByTertua() {
+        Collections.sort(this.pegawaiInstansi, Comparator.comparing(PegawaiModel::getTanggalLahir));
+        return this.pegawaiInstansi.get(0);
     }
 }

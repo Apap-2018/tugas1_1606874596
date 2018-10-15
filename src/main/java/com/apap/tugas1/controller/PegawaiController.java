@@ -1,7 +1,9 @@
 package com.apap.tugas1.controller;
 
+import com.apap.tugas1.model.InstansiModel;
 import com.apap.tugas1.model.JabatanModel;
 import com.apap.tugas1.model.PegawaiModel;
+import com.apap.tugas1.service.InstansiService;
 import com.apap.tugas1.service.JabatanService;
 import com.apap.tugas1.service.PegawaiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Controller
@@ -22,9 +25,15 @@ public class PegawaiController {
     @Autowired
     private JabatanService jabatanService;
 
+    @Autowired
+    private InstansiService instansiService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     private String home(Model model) {
         List<JabatanModel> listJabatan = jabatanService.getAllJabatan();
+        List<InstansiModel> listInstansi = instansiService.getAllInstansi();
+
+        model.addAttribute("listInstansi", listInstansi);
         model.addAttribute("listJabatan", listJabatan);
         return "home";
     }
@@ -52,6 +61,31 @@ public class PegawaiController {
         model.addAttribute("jabatans", pegawai.getJabatan());
         model.addAttribute("gaji", gaji);
         return"view-pegawai";
+    }
+
+    @RequestMapping(value = "/pegawai/termuda-tertua", method = RequestMethod.GET)
+    public String viewTermudaTertua(@RequestParam("id") BigInteger id, Model model){
+        InstansiModel instansi = instansiService.getInstansiDetailById(id);
+
+        PegawaiModel pegawaiTermuda = instansi.getPegawaiByTermuda();
+        PegawaiModel pegawaiTertua = instansi.getPegawaiByTertua();
+
+        Double gajiPokokTermuda = pegawaiTermuda.getJabatanGajiTertinggi().getGajiPokok();
+        Double tunjanganTermuda = pegawaiTermuda.getInstansi().getProvinsi().getPresentaseTunjangan();
+        int gajiTermuda = (int) (gajiPokokTermuda + (tunjanganTermuda * gajiPokokTermuda));
+
+        Double gajiPokokTertua = pegawaiTertua.getJabatanGajiTertinggi().getGajiPokok();
+        Double tunjanganTertua = pegawaiTertua.getInstansi().getProvinsi().getPresentaseTunjangan();
+        int gajiTertua = (int) (gajiPokokTertua + (tunjanganTertua * gajiPokokTertua));
+
+        model.addAttribute("pegawaiTermuda", pegawaiTermuda);
+        model.addAttribute("jabatansTermuda", pegawaiTermuda.getJabatan());
+        model.addAttribute("gajiTermuda", gajiTermuda);
+
+        model.addAttribute("pegawaiTertua", pegawaiTertua);
+        model.addAttribute("jabatansTertua", pegawaiTertua.getJabatan());
+        model.addAttribute("gajiTertua", gajiTertua);
+        return"view-termudatertua";
     }
 
 }

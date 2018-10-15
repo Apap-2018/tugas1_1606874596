@@ -16,7 +16,46 @@
                 <div class="card-header" align="center" th:text="'Data Pegawai: '+${pegawai.getNip()}">
                 </div>
                 <div class="card-body">
-                    <table th:replace="fragments/fragment :: dataPegawai"></table>
+                    <table class="table table-borderless">
+                        <tbody>
+                        <tr>
+                            <td><b>NIP</b></td>
+                            <td th:text="${pegawai.getNama()}"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Nama</b></td>
+                            <td th:text="${pegawai.getTempatLahir()}"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Tempat Lahir</b></td>
+                            <td th:text="${pegawai.getTempatLahir()}"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Tanggal Lahir</b></td>
+                            <td th:text="${pegawai.getTanggalLahir()}"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Tahun Masuk</b></td>
+                            <td th:text="${pegawai.getTahunMasuk()}"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Nama Instansi</b></td>
+                            <td th:text="${pegawai.getInstansi().getNama()}"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Jabatan</b></td>
+                            <td>
+                                <div th:each="jabatan : ${jabatans}">
+                                    <span class="badge badge-primary" th:text="${jabatan.getNama()}"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Gaji</b></td>
+                            <td th:text="'Rp'+${gaji}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
