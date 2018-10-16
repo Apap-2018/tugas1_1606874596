@@ -1,5 +1,7 @@
 package com.apap.tugas1.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -28,6 +30,7 @@ public class JabatanModel implements Serializable {
     @Column(name = "gaji_pokok", nullable = false)
     private Double gajiPokok;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             mappedBy = "jabatan")

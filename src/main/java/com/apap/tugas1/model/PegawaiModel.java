@@ -51,6 +51,7 @@ public class PegawaiModel implements Serializable {
     @JsonIgnore
     private InstansiModel instansi;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "jabatan_pegawai",
             joinColumns = {@JoinColumn(name = "id_pegawai")},

@@ -31,6 +31,7 @@ public class InstansiModel implements Serializable {
     @Column(name = "deskripsi", nullable = false)
     private String deskripsi;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "instansi", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<PegawaiModel> pegawaiInstansi;
 

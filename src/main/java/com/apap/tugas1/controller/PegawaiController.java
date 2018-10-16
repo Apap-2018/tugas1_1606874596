@@ -3,16 +3,15 @@ package com.apap.tugas1.controller;
 import com.apap.tugas1.model.InstansiModel;
 import com.apap.tugas1.model.JabatanModel;
 import com.apap.tugas1.model.PegawaiModel;
+import com.apap.tugas1.model.ProvinsiModel;
 import com.apap.tugas1.service.InstansiService;
 import com.apap.tugas1.service.JabatanService;
 import com.apap.tugas1.service.PegawaiService;
+import com.apap.tugas1.service.ProvinsiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -28,6 +27,9 @@ public class PegawaiController {
     @Autowired
     private InstansiService instansiService;
 
+    @Autowired
+    private ProvinsiService provinsiService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     private String home(Model model) {
         List<JabatanModel> listJabatan = jabatanService.getAllJabatan();
@@ -40,7 +42,9 @@ public class PegawaiController {
 
     @RequestMapping(value = "/pegawai/tambah", method = RequestMethod.GET)
     private String add(Model model){
+        List<ProvinsiModel> listProvinsi = provinsiService.getAllProvinsi();
         model.addAttribute("pegawai", new PegawaiModel());
+        model.addAttribute("listProvinsi", listProvinsi);
         return "add-pegawai";
     }
 
@@ -86,6 +90,15 @@ public class PegawaiController {
         model.addAttribute("jabatansTertua", pegawaiTertua.getJabatan());
         model.addAttribute("gajiTertua", gajiTertua);
         return"view-termudatertua";
+    }
+
+
+    @RequestMapping(value = "/provinsi/instansi", method = RequestMethod.GET)
+    @ResponseBody
+    public List<InstansiModel> findAllInstansi(@RequestParam(value = "id", required = true) BigInteger id) {
+        ProvinsiModel provinsi = provinsiService.getProvinsiDetailById(id);
+
+        return provinsi.getInstansiProvinsi();
     }
 
 }
