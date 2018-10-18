@@ -57,4 +57,16 @@ public class JabatanController {
         model.addAttribute("allJabatan", allJabatan);
         return"viewall-jabatan";
     }
+
+    @RequestMapping(value = "/jabatan/hapus", method = RequestMethod.POST)
+    private String deleteJabatan(@RequestParam(value = "id", required = true) BigInteger id) {
+        JabatanModel jabatan = jabatanService.getJabatanDetailById(id);
+        if (jabatan.getPegawai().isEmpty()){
+            jabatanService.deleteJabatan(jabatan);
+            return "delete";
+        }
+        else {
+            return "delete-failed";
+        }
+    }
 }

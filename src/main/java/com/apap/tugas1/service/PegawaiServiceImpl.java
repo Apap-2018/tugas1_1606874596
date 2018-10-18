@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigInteger;
+import java.util.List;
+
 @Service
 @Transactional
 public class PegawaiServiceImpl implements PegawaiService{
@@ -16,6 +19,11 @@ public class PegawaiServiceImpl implements PegawaiService{
     @Override
     public PegawaiModel getPegawaiDetailByNip(String nip) {
         return pegawaiDB.findByNip(nip);
+    }
+
+    @Override
+    public List<PegawaiModel> getAllPegawaiForSearch(BigInteger idProvinsi, BigInteger idInstansi, BigInteger idJabatan) {
+        return pegawaiDB.findPegawaiModelByProvInJab(idProvinsi, idInstansi, idJabatan);
     }
 
     @Override

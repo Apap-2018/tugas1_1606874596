@@ -11,9 +11,13 @@ import com.apap.tugas1.service.ProvinsiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Controller
@@ -43,8 +47,14 @@ public class PegawaiController {
     @RequestMapping(value = "/pegawai/tambah", method = RequestMethod.GET)
     private String add(Model model){
         List<ProvinsiModel> listProvinsi = provinsiService.getAllProvinsi();
-        model.addAttribute("pegawai", new PegawaiModel());
+        List<JabatanModel> listJabatan = jabatanService.getAllJabatan();
+        PegawaiModel pegawai = new PegawaiModel();
+        pegawai.setJabatan(new ArrayList<JabatanModel>());
+        pegawai.getJabatan().add(new JabatanModel());
+
+        model.addAttribute("pegawai", pegawai);
         model.addAttribute("listProvinsi", listProvinsi);
+        model.addAttribute("listJabatan", listJabatan);
         return "add-pegawai";
     }
 
@@ -92,13 +102,45 @@ public class PegawaiController {
         return"view-termudatertua";
     }
 
+    @RequestMapping(value="/pegawai/tambah", params={"addRow"}, method = RequestMethod.POST)
+    public String addRow(@ModelAttribute PegawaiModel pegawai, BindingResult bindingResult, Model model) {
+        pegawai.getJabatan().add(new JabatanModel());
+        model.addAttribute("pegawai", pegawai);
 
-    @RequestMapping(value = "/provinsi/instansi", method = RequestMethod.GET)
-    @ResponseBody
-    public List<InstansiModel> findAllInstansi(@RequestParam(value = "id", required = true) BigInteger id) {
-        ProvinsiModel provinsi = provinsiService.getProvinsiDetailById(id);
-
-        return provinsi.getInstansiProvinsi();
+        List<JabatanModel> listJabatan = jabatanService.getAllJabatan();
+        model.addAttribute("listJabatan", listJabatan);
+        return "add-pegawai";
     }
+
+    @RequestMapping(value="/pegawai/tambah", params={"removeRow"}, method = RequestMethod.POST)
+    public String removeRow(@ModelAttribute PegawaiModel pegawai, final BindingResult bindingResult, final HttpServletRequest req, Model model) {
+        final Integer rowId = Integer.valueOf(req.getParameter("removeRow"));
+        pegawai.getJabatan().remove(rowId.intValue());
+
+        model.addAttribute("pegawai", pegawai);
+        return "add-pegawai";
+    }
+
+
+    @RequestMapping(value = "/pegawai/cari", method = RequestMethod.GET)
+    public String searchPegawaiResult(@RequestParam(value="provinsi", required = false) BigInteger provinsi,
+                                      @RequestParam(value="instansi", required = false) BigInteger instansi,
+                                      @RequestParam(value="jabatan", required = false) BigInteger jabatan, Model model){
+        List<PegawaiModel> listPegawai = pegawaiService.getAllPegawaiForSearch(provinsi, instansi, jabatan);
+        for (int i=0 ; i<listPegawai.size() ;i++){
+            System.out.println(listPegawai.get(i));
+        }
+        List<ProvinsiModel> listProvinsi = provinsiService.getAllProvinsi();
+        List<JabatanModel> listJabatan = jabatanService.getAllJabatan();
+
+        model.addAttribute("listProvinsi", listProvinsi);
+        model.addAttribute("listJabatan", listJabatan);
+        model.addAttribute("listPegawai", listPegawai);
+        return"search-pegawai";
+    }
+
+
+
+
 
 }

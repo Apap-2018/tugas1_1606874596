@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title id="pageTitle">Cari Pegawai</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header" align="center">
+                    Cari Pegawai
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/pegawai/cari}" method="GET">
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label for="provinsi" class="col-sm-3 col-form-label">Provinsi</label>
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <select  class="form-control" required="required" th:value="${listProvinsi}" name="provinsi" id="provinsi">
+                                            <option disabled="disabled" selected="selected" >
+                                                Pilih Provinsi
+                                            </option>
+                                            <option th:each="provinsi : ${listProvinsi}"
+                                                    th:value="${provinsi.getId()}"
+                                                    th:text="${provinsi.getNama()}" >
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="instansi" class="col-sm-3 col-form-label">Instansi</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" th:value="${instansi}" name="instansi" id="instansi" required="required">
+                                        <option disabled="disabled" selected="selected" >
+                                            Pilih Instansi
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="instansi" class="col-sm-3 col-form-label">Jabatan</label>
+                                <div class="col-sm-9">
+                                <select  class="form-control" required="required" name="jabatan" id="jabatan">
+                                    <option disabled="disabled" selected="selected" >
+                                        Pilih Jabatan
+                                    </option>
+                                    <option th:each="jabatan : ${listJabatan}"
+                                            th:value="${jabatan.getId()}"
+                                            th:text="${jabatan.getNama()}" >
+                                    </option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-9 offset-sm-3">
+                                    <button type="submit" class="btn btn-primary">Lihat</button>
+                                </div>
+                            </div>
+                            <p></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <table id="hasilPegawai" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>NIP</th>
+                            <th>Nama</th>
+                            <th>Tempat Lahir</th>
+                            <th>Tanggal Lahir</th>
+                            <th>Tahun Masuk</th>
+                            <th>Nama Instansi</th>
+                            <th>Jabatan</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <div th:each="pegawai : ${listPegawai}">
+                            <tr>
+                                <td th:text="${pegawai.getNip()}"></td>
+                                <td th:text="${pegawai.getNama()}"></td>
+                                <td th:text="${pegawai.getTempatLahir()}"></td>
+                                <td th:text="${pegawai.getTanggaLahir()}"></td>
+                                <td th:text="${pegawai.getTahunMasuk()}"></td>
+                                <td th:text="${pegawai.getInstansi().getNama()}"></td>
+                                <td th:text="${pegawai.getJabatan().getNama()}"></td>
+                            </tr>
+                        </div>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="fragments/fragment :: footer"></footer>
+<script>
+    $(document).ready(function() {
+        $('#hasilPegawai').DataTable();
+    } );
+
+    $('#provinsi').change(
+        function() {
+            $.getJSON("/provinsi/instansi", {
+                id : $(this).val(),
+                ajax : 'true'
+            }, function(data) {
+                var html = '<option value="">Pilih Instansi</option>';
+                var len = data.length;
+                for ( var i = 0; i < len; i++) {
+                    html += '<option value="' +data[i].id + '">'
+                        + data[i].nama + '</option>';
+                }
+                html += '</option>';
+                $('#instansi').html(html);
+            });
+        });
+</script>
+</body>
+</html>

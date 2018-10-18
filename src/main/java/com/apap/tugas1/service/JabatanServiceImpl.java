@@ -41,4 +41,9 @@ public class JabatanServiceImpl implements JabatanService{
         jabatanDB.save(updatedJabatan);
     }
 
+    @Override
+    public void deleteJabatan(JabatanModel jabatan) {
+        jabatanDB.delete(jabatan);
+    }
+
 }

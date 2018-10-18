@@ -19,5 +19,12 @@ public class ProvinsiController {
     @Autowired
     private ProvinsiService provinsiService;
 
+    @RequestMapping(value = "/provinsi/instansi", method = RequestMethod.GET)
+    @ResponseBody
+    public List<InstansiModel> findAllInstansi(@RequestParam(value = "id", required = true) BigInteger id) {
+        ProvinsiModel provinsi = provinsiService.getProvinsiDetailById(id);
+
+        return provinsi.getInstansiProvinsi();
+    }
 
 }

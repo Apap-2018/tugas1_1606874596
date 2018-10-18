@@ -45,7 +45,9 @@
             </form>
         </div>
         <div class="col-md-2">
-            <a class="btn btn-danger btn-lg" href="/" role="button">Hapus</a>
+            <form th:action="@{/jabatan/hapus}" method="POST">
+                <button th:value="${jabatan.getId()}" type="submit" name="id" class="btn btn-danger btn-lg">Hapus</button>
+            </form>
         </div>
     </div>
 </div>

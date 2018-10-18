@@ -13,6 +13,7 @@ public interface JabatanService {
 
     void addJabatan(JabatanModel jabatan);
     void updateJabatan(JabatanModel jabatan, BigInteger id);
+    void deleteJabatan(JabatanModel jabatan);
 
 
 }
