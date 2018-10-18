@@ -127,6 +127,9 @@ public class PegawaiController {
                                       @RequestParam(value="instansi", required = false) BigInteger instansi,
                                       @RequestParam(value="jabatan", required = false) BigInteger jabatan, Model model){
         List<PegawaiModel> listPegawai = pegawaiService.getAllPegawaiForSearch(provinsi, instansi, jabatan);
+        InstansiModel instansiTujuan = instansiService.getInstansiDetailById(instansi);
+        JabatanModel jabatanTujuan = jabatanService.getJabatanDetailById(jabatan);
+
         for (int i=0 ; i<listPegawai.size() ;i++){
             System.out.println(listPegawai.get(i));
         }
@@ -136,6 +139,9 @@ public class PegawaiController {
         model.addAttribute("listProvinsi", listProvinsi);
         model.addAttribute("listJabatan", listJabatan);
         model.addAttribute("listPegawai", listPegawai);
+
+        model.addAttribute("instansiTujuan", instansiTujuan);
+        model.addAttribute("jabatanTujuan", jabatanTujuan);
         return"search-pegawai";
     }
 

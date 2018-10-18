@@ -11,7 +11,7 @@ import java.util.List;
 public interface PegawaiDB  extends JpaRepository<PegawaiModel, Long> {
     PegawaiModel findByNip(String nip);
 
-    @Query("SELECT p FROM PegawaiModel p, InstansiModel i JOIN p.jabatan j WHERE i.provinsi = :idProvinsi AND i.id = :idInstansi AND j.id = :idJabatan AND p.instansi = i.id")
+    @Query("SELECT p FROM PegawaiModel p, InstansiModel i JOIN p.jabatan j WHERE i.provinsi.id = :idProvinsi AND i.id = :idInstansi AND j.id = :idJabatan AND p.instansi = i.id")
     List<PegawaiModel> findPegawaiModelByProvInJab(@Param("idProvinsi") BigInteger idProvinsi,
                                      @Param("idInstansi") BigInteger idInstansi,
                                      @Param("idJabatan") BigInteger idJabatan);
