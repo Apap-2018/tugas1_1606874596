@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.math.BigInteger;
 
-public interface JabatanDB extends JpaRepository<JabatanModel, Long> {
-    JabatanModel findById(BigInteger id);
+public interface JabatanDB extends JpaRepository<JabatanModel, BigInteger> {
+
 }

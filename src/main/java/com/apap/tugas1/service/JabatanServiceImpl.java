@@ -24,7 +24,7 @@ public class JabatanServiceImpl implements JabatanService{
 
     @Override
     public JabatanModel getJabatanDetailById(BigInteger id) {
-        return jabatanDB.findById(id);
+        return jabatanDB.findById(id).get();
     }
 
     @Override
@@ -34,7 +34,7 @@ public class JabatanServiceImpl implements JabatanService{
 
     @Override
     public void updateJabatan(JabatanModel jabatan, BigInteger id) {
-        JabatanModel updatedJabatan = jabatanDB.findById(id);
+        JabatanModel updatedJabatan = jabatanDB.findById(id).get();
         updatedJabatan.setNama(jabatan.getNama());
         updatedJabatan.setDeskripsi(jabatan.getDeskripsi());
         updatedJabatan.setGajiPokok(jabatan.getGajiPokok());

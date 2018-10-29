@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.math.BigInteger;
 
-public interface ProvinsiDB extends JpaRepository<ProvinsiModel, Long> {
-    ProvinsiModel findById(BigInteger id);
+public interface ProvinsiDB extends JpaRepository<ProvinsiModel, BigInteger> {
 
 }

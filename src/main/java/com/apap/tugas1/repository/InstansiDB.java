@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.math.BigInteger;
 
-public interface InstansiDB extends JpaRepository<InstansiModel, Long> {
-    InstansiModel findById(BigInteger id);
+public interface InstansiDB extends JpaRepository<InstansiModel, BigInteger> {
 
 }

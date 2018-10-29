@@ -18,7 +18,7 @@ public class ProvinsiServiceImpl implements ProvinsiService{
 
     @Override
     public ProvinsiModel getProvinsiDetailById(BigInteger id) {
-        return provinsiDB.findById(id);
+        return provinsiDB.findById(id).get();
     }
 
     @Override
