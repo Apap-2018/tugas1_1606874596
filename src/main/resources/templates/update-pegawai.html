@@ -17,7 +17,8 @@
                     Tambah Pegawai
                 </div>
                 <div class="card-body">
-                    <form th:action="@{/pegawai/tambah}"  th:object="${pegawai}" id="pegawaiForm" method="POST">
+                    <form th:action="@{/pegawai/ubah}"  th:object="${pegawai}" id="pegawaiForm" method="POST">
+                        <input type="hidden" name="nip" th:value="*{nip}"/>
                         <div class="form-group row">
                             <label for="nama" class="col-sm-3 col-form-label">Nama</label>
                             <div class="col-sm-9">
@@ -46,7 +47,7 @@
                             <label for="provinsi" class="col-sm-3 col-form-label">Provinsi</label>
                             <div class="col-sm-9">
                                 <div class="form-group">
-                                    <select  class="form-control" required="required" th:value="${listProvinsi}" name="provinsi" id="provinsi">
+                                    <select  class="form-control" required="required" th:value="*{instansi.provinsi}"  name="provinsi" id="provinsi">
                                         <option disabled="disabled" selected="selected" >
                                             Pilih Provinsi
                                         </option>
@@ -61,7 +62,8 @@
                         <div class="form-group row">
                             <label for="instansi" class="col-sm-3 col-form-label">Instansi</label>
                             <div class="col-sm-9">
-                                <select class="form-control" th:value="${instansi}" name="instansi" id="instansi" required="required">
+                                <select class="form-control" th:value="*{instansi}" name="instansi" id="instansi" required="required">
+                                    <option  th:value="*{instansi.id}" selected="selected" th:text="*{instansi.nama}"></option>
                                     <option disabled="disabled" selected="selected" >
                                         Pilih Instansi
                                     </option>
@@ -81,7 +83,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <button style="margin-top: 8px ; margin-bottom: 10px" type="submit" class="btn btn-danger btn-sm" name="removeRow" th:value="${iterationStatus.index}"  th:style="${iterationStatus.count} == 1 ? 'display: none;' : ''">Hapus Jabatan</button>
+                                        <button style="margin-top: 8px ; margin-bottom: 10px" type="submit" class="btn btn-danger btn-sm" name="removeRow" th:value="${iterationStatus.index}" th:style="${iterationStatus.count} == 1 ? 'display: none;' : ''">Hapus Jabatan</button>
                                     </td>
                                     <br>
                                 </div>
@@ -113,7 +115,7 @@
                 var len = data.length;
                 for ( var i = 0; i < len; i++) {
                     html += '<option value="' +data[i].id + '">'
-                            + data[i].nama + '</option>';
+                        + data[i].nama + '</option>';
                 }
                 html += '</option>';
                 $('#instansi').html(html);

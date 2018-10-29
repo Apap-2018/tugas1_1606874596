@@ -2,6 +2,7 @@ package com.apap.tugas1.service;
 
 import com.apap.tugas1.model.InstansiModel;
 import com.apap.tugas1.model.JabatanModel;
+import com.apap.tugas1.model.ProvinsiModel;
 import com.apap.tugas1.repository.InstansiDB;
 import com.apap.tugas1.repository.JabatanPegawaiDB;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,10 @@ public class InstansiServiceImpl implements InstansiService {
     @Override
     public InstansiModel getInstansiDetailById(BigInteger id) {
         return instansiDB.findById(id).get();
+    }
+
+    @Override
+    public List<InstansiModel> getInstansiFromProvinsi(ProvinsiModel provinsi) {
+        return instansiDB.findByProvinsi(provinsi);
     }
 }

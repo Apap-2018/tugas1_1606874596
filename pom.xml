@@ -63,6 +63,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <finalName>tugas1_1606874596</finalName>
     </build>
 
 

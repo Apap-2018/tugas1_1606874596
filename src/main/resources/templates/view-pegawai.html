@@ -58,6 +58,12 @@
                     </table>
                 </div>
             </div>
+            <div class="row justify-content-center">
+            <form action="/pegawai/ubah" method="GET">
+                <input type="hidden" name="nip" th:value="${pegawai.nip}">
+                <input class="btn btn-primary" type="submit" value="Ubah" style="margin-top: 20px;">
+            </form>
+            </div>
         </div>
     </div>
 </div>
